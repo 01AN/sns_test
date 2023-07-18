@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsersController;
 
 /*
@@ -25,9 +26,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['middleware' => 'auth'], function() {
 
     // ユーザ関連
-    Route::resource('users', UsersController::class , ['only' => ['index', 'show', 'edit', 'update']]);
+    Route::resource('/users', UsersController::class)->only(['index', 'show', 'edit', 'update']);
     
     // フォロー/フォロー解除を追加
-    Route::post('users/{user}/follow', 'UsersController@follow')->name('follow');
-    Route::delete('users/{user}/unfollow', 'UsersController@unfollow')->name('unfollow');
+    Route::post('users/{user}/follow', [App\Http\Controllers\UsersController::class , 'follow'])->name('follow');
+    Route::delete('users/{user}/unfollow', [App\Http\Controllers\UsersController::class , 'unfollow'])->name('unfollow');
+    
 });
