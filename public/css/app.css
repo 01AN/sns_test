@@ -1,5 +1,6 @@
 body {
-    background-color: whitesmoke;
+    background-color: gray
+;
 }
 
 .page {
@@ -14,9 +15,18 @@ body {
     color: blue;
 }
 
-button {
+.button {
+    background-color: white;
     border-radius: 10px;
     font-weight: bold;
+    color: black;
+}
+
+.button-black{
+    background-color: black;
+    border-radius: 10px;
+    font-weight: bold;
+    color: white;
 }
 
 .button-white {
