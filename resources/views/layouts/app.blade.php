@@ -53,7 +53,7 @@
                                 @endif
                             @else
                                 <li class="nav-item mr-5">
-                                    <a href="{{ url('tweets/create') }}" class="btn btn-md btn-primary">ツイートする</a>
+                                    <a href="{{ url('tweets/create') }}" class="btn btn-md btn-primary">投稿する</a>
                                 </li>
                                 <li class="nav-item">
                                     <img src="{{ asset('storage/profile_image/' .auth()->user()->profile_image) }}" class="rounded-circle" width="50" height="50">
@@ -74,8 +74,14 @@
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             @csrf
                                         </form>
+
+                                        <a href="/tweets" class="home-back">HOME</a>
                                     </div>
                                 </li>
+                                <div>
+                                    <a href="/tweets" class="home-back">HOME</a>
+                                    <a href="/users" class="user-back">USERS</a>
+                                </div>
                             @endguest
                         </ul>
                     </div>

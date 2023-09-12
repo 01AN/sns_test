@@ -1,118 +1,111 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="page page-user">
+    <div class="page user-page">
         <div class="page-container">
-            <div class="post-list">
                 @foreach ($all_users as $user)
-                    <div class="post">
-                            <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="image-icon">
-                            <div class="user">
+                    <div class="user-info">
+                            <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="user-icon" >
+                            <div class="user-info-name">
                                 <p class="user-name">{{ $user->name }}</p>
-                                <a href="{{ url('users/' .$user->id) }}" class="user-name">{{ $user->screen_name }}</a>
+                                <a href="{{ url('users/' .$user->id) }}" class="user-sceen-name">{{ $user->screen_name }}</a>
                             </div>
                             @if (auth()->user()->isFollowed($user->id))
-                                <div class="px-2">
+                                <div class="user-followed">
                                     <span class="followed">フォローされています</span>
                                 </div>
                             @endif
-                            <div class="follow">
+                            <div class="user-follow">
                                 @if (auth()->user()->isFollowing($user->id))
                                     <form action="{{ route('unfollow', ['user' => $user->id]) }}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
 
-                                        <button type="submit" class="button">フォロー解除</button>
+                                        <button type="submit" class="unfollow button">フォロー解除</button>
                                     </form>
                                 @else
                                     <form action="{{ route('follow', ['user' => $user->id]) }}" method="POST">
                                         {{ csrf_field() }}
 
-                                        <button type="submit" class="button-black">フォローする</button>
+                                        <button type="submit" class="follow button-black">フォローする</button>
                                     </form>
                                 @endif
                             </div>
                     </div>
                 @endforeach
             </div>
-        </div>
-        <div class="my-4 d-flex justify-content-center">
+        {{-- <div class="pagenate">
             {{ $all_users->links() }}
-        </div>
+        </div> --}}
     </div>
 @endsection
 
 <style scoped>
     .user-page .page-container {
-        padding: 0 10px;
-    }
-
-    .user-page .user-info .user-icon {
-        width: 60px;
-        height: 60px;
     }
 
     .user-page .user-info {
-        margin-bottom: 10px;
     }
 
-    .user-page .user-row {
-        display: flex;
-        justify-content: space-between;
-        line-height: 60px;
+    .user-page .user-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        overflow: hidden;
+        position: relative;
     }
 
-    .user-page .user-info .user-name {
-        font-size: 20px;
-        font-weight: bold;
+    .user-page .user-icon img {
+        width: 100%;
+        height: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
     }
 
-    .user-page .biography {
-        font-size: 14px;
-        padding: 8px 0;
-    }
-
-    .user-page .follow-info {
-        display: flex;
-        font-size: 14px;
-    }
-
-    .user-page .follow-info .follow {
-        margin-right: 5px;
-    }
-
-    .user-page .title {
-        font-size: 18px;
-        font-weight: bold;
-        color: gray;
-        margin-bottom: 6px;
-    }
-
-    .user-page .post {
-        display: flex;
-        padding: 0 10px;
-    }
-
-    .user-page .post .container {
-        width: 90%;
-    }
-
-    .user-page .post-list .user-icon {
-        width: 40px;
-        height: 40px;
+    .user-page .user-info-name {
     }
 
     .user-page .user-name {
-        line-height: 40px;
     }
 
-    .user-page .content {
-        font-size: 14px;
-        word-wrap: break-word;
+    .user-page .user-screen-name {
     }
 
-    .user-page .time-stamp {
-        font-size: 8px;
-        text-align: end;
+    .user-page .user-followed {
     }
+
+    .user-page .followed {
+    }
+
+    .user-page .user-follow {
+    }
+
+    .user-page .unfollow {
+    }
+
+    .user-page .follow {
+    }
+
+    .user-page .pagenate {
+    }
+
+    .user-page .pagenate {
+    }
+    
+
+.icon-circle img{
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
 </style>

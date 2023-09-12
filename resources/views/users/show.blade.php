@@ -2,55 +2,55 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8 mb-3">
-            <div class="card">
-                <div class="d-inline-flex">
-                    <div class="p-3 d-flex flex-column">
+    <div class="page user-show">
+        <div class="">
+            <div class="page-continer">
+                <div class="user-info">
+                    <div class="user">
                         <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="rounded-circle" width="100" height="100">
-                        <div class="mt-3 d-flex flex-column">
-                            <h4 class="mb-0 font-weight-bold">{{ $user->name }}</h4>
-                            <span class="text-secondary">{{ $user->screen_name }}</span>
+                        <div class="user">
+                            <h4 class="user-name">{{ $user->name }}</h4>
+                            <span class="user-sreenname">{{ $user->screen_name }}</span>
                         </div>
                     </div>
-                    <div class="p-3 d-flex flex-column justify-content-between">
-                        <div class="d-flex">
-                            <div>
+                    <div class="follow-content">
+                        <div class="follow-info">
+                            <div class="">
                                 @if ($user->id === Auth::user()->id)
-                                    <a href="{{ url('users/' .$user->id .'/edit') }}" class="btn btn-primary">プロフィールを編集する</a>
+                                    <a href="{{ url('users/' .$user->id .'/edit') }}" class="button">プロフィールを編集する</a>
                                 @else
                                     @if ($is_following)
-                                        <form action="{{ route('unfollow', ['id' => $user->id]) }}" method="POST" class="mb-2">
+                                        <form action="{{ route('unfollow', ['id' => $user->id]) }}" method="POST" class="unfollow">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
 
-                                            <button type="submit" class="btn btn-danger">フォロー解除</button>
+                                            <button type="submit" class="button">フォロー解除</button>
                                         </form>
                                     @else
-                                        <form action="{{ route('follow', ['id' => $user->id]) }}" method="POST" class="mb-2">
+                                        <form action="{{ route('follow', ['id' => $user->id]) }}" method="POST" class="fo">
                                             {{ csrf_field() }}
 
-                                            <button type="submit" class="btn btn-primary">フォローする</button>
+                                            <button type="submit" class="button">フォローする</button>
                                         </form>
                                     @endif
 
                                     @if ($is_followed)
-                                        <span class="mt-2 px-1 bg-secondary text-light">フォローされています</span>
+                                        <span class="page-font">フォローされています</span>
                                     @endif
                                 @endif
                             </div>
                         </div>
-                        <div class="d-flex justify-content-end">
-                            <div class="p-2 d-flex flex-column align-items-center">
-                                <p class="font-weight-bold">ツイート数</p>
+                        <div class="user-intro">
+                            <div class="post">
+                                <p class="page-font">投稿数</p>
                                 <span>{{ $tweet_count }}</span>
                             </div>
-                            <div class="p-2 d-flex flex-column align-items-center">
-                                <p class="font-weight-bold">フォロー数</p>
+                            <div class="follow">
+                                <p class="page-font">フォロー数</p>
                                 <span>{{ $follow_count }}</span>
                             </div>
-                            <div class="p-2 d-flex flex-column align-items-center">
-                                <p class="font-weight-bold">フォロワー数</p>
+                            <div class="follower">
+                                <p class="page-font">フォロワー数</p>
                                 <span>{{ $follower_count }}</span>
                             </div>
                         </div>
