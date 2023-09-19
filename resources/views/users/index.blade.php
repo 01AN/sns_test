@@ -8,7 +8,7 @@
                             <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="user-icon" >
                             <div class="user-info-name">
                                 <p class="user-name">{{ $user->name }}</p>
-                                <a href="{{ url('users/' .$user->id) }}" class="user-sceen-name">{{ $user->screen_name }}</a>
+                                <a href="{{ url('users/' .$user->id) }}" class="user-screen-name">{{ $user->screen_name }}</a>
                             </div>
                             @if (auth()->user()->isFollowed($user->id))
                                 <div class="user-followed">

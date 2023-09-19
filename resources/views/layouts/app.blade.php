@@ -23,11 +23,11 @@
         <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
     </head>
     <body>
-        <div id="app">
-            <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <div id="header">
+            <nav class="navbar">
                 <div class="container">
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                    <a class="navbar-brand" href="{{ url('/tweets') }}">
+                        Blender SNS
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
@@ -52,7 +52,7 @@
                                     </li>
                                 @endif
                             @else
-                                <li class="nav-item mr-5">
+                                <li class="nav-item">
                                     <a href="{{ url('tweets/create') }}" class="btn btn-md btn-primary">投稿する</a>
                                 </li>
                                 <li class="nav-item">
@@ -75,11 +75,9 @@
                                             @csrf
                                         </form>
 
-                                        <a href="/tweets" class="home-back">HOME</a>
                                     </div>
                                 </li>
                                 <div>
-                                    <a href="/tweets" class="home-back">HOME</a>
                                     <a href="/users" class="user-back">USERS</a>
                                 </div>
                             @endguest
