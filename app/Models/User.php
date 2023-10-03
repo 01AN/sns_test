@@ -39,6 +39,7 @@ class User extends Authenticatable
         return $this->Where('id', '<>', $user_id)->get();
     }
 
+
         // フォローする
     public function follow(Int $user_id) 
     {

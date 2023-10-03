@@ -2,92 +2,87 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center mb-5">
-        <div class="col-md-8 mb-3">
+    <div class="">
+        <div class="">
             <div class="card">
-                <div class="card-haeder p-3 w-100 d-flex">
+                <div class="card-haeder">
                     <img src="{{ asset('storage/profile_image/' .$tweet->user->profile_image) }}" class="rounded-circle" width="50" height="50">
-                    <div class="ml-2 d-flex flex-column">
-                        <p class="mb-0">{{ $tweet->user->name }}</p>
-                        <a href="{{ url('users/' .$tweet->user->id) }}" class="text-secondary">{{ $tweet->user->screen_name }}</a>
+                    <div class="post-username">
+                        <p class="user-name">{{ $tweet->user->name }}</p>
+                        <a href="{{ url('users/' .$tweet->user->id) }}" class="user-screenname">{{ $tweet->user->screen_name }}</a>
                     </div>
-                    <div class="d-flex justify-content-end flex-grow-1">
-                        <p class="mb-0 text-secondary">{{ $tweet->created_at->format('Y-m-d H:i') }}</p>
+                    <div class="timeline">
+                        <p class="text">{{ $tweet->created_at->format('Y-m-d H:i') }}</p>
                     </div>
                 </div>
                 <div class="card-body">
                     {!! nl2br(e($tweet->text)) !!}
                 </div>
-                <div class="card-footer py-1 d-flex justify-content-end bg-white">
+                <div class="card-footer">
                     @if ($tweet->user->id === Auth::user()->id)
-                        <div class="dropdown mr-3 d-flex align-items-center">
-                            <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-ellipsis-v fa-fw"></i>
-                            </a>
+                        <div class="post-login-user">
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <form method="POST" action="{{ url('tweets/' .$tweet->id) }}" class="mb-0">
+                                <form method="POST" action="{{ url('tweets/' .$tweet->id) }}" class="post-menu">
                                     @csrf
                                     @method('DELETE')
 
                                     <a href="{{ url('tweets/' .$tweet->id .'/edit') }}" class="dropdown-item">編集</a>
-                                    <button type="submit" class="dropdown-item del-btn">削除</button>
+                                    <button type="submit" class="dropdown-item button">削除</button>
                                 </form>
                             </div>
                         </div>
                     @endif
-                    <div class="mr-3 d-flex align-items-center">
+                    <div class="comment-item">
                         <a href="{{ url('tweets/' .$tweet->id) }}"><i class="far fa-comment fa-fw"></i></a>
-                        <p class="mb-0 text-secondary">{{ count($tweet->comments) }}</p>
+                        <p class="count-comments">{{ count($tweet->comments) }}</p>
                     </div>
 
-                    <!-- ここから -->
-                    <div class="d-flex align-items-center">
+                    <div class="fav-item">
                         @if (!in_array($user->id, array_column($tweet->favorites->toArray(), 'user_id'), TRUE))
-                            <form method="POST" action="{{ url('favorites/') }}" class="mb-0">
+                            <form method="POST" action="{{ url('favorites/') }}" class="fav">
                                 @csrf
 
                                 <input type="hidden" name="tweet_id" value="{{ $tweet->id }}">
-                                <button type="submit" class="btn p-0 border-0 text-primary"><i class="far fa-heart fa-fw"></i></button>
+                                <button type="submit" class="button"><i class="far fa-heart fa-fw"></i></button>
                             </form>
                         @else
-                            <form method="POST" action="{{ url('favorites/' .array_column($tweet->favorites->toArray(), 'id', 'user_id')[$user->id]) }}" class="mb-0">
+                            <form method="POST" action="{{ url('favorites/' .array_column($tweet->favorites->toArray(), 'id', 'user_id')[$user->id]) }}" class="delet-fav">
                                 @csrf
                                 @method('DELETE')
 
-                                <button type="submit" class="btn p-0 border-0 text-danger"><i class="fas fa-heart fa-fw"></i></button>
+                                <button type="submit" class="button-black"><i class="fas fa-heart fa-fw"></i></button>
                             </form>
                         @endif
-                        <p class="mb-0 text-secondary">{{ count($tweet->favorites) }}</p>
+                        <p class="count-fav">{{ count($tweet->favorites) }}</p>
                     </div>
-                    <!-- ここまで -->
 
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row justify-content-center">
-        <div class="col-md-8 mb-3">
+    <div class="comment-form">
+        <div class="">
             <ul class="list-group">
                 @forelse ($comments as $comment)
                     <li class="list-group-item">
-                        <div class="py-3 w-100 d-flex">
+                        <div class="comment-item">
                             <img src="{{ asset('storage/profile_image/' .$comment->user->profile_image) }}" class="rounded-circle" width="50" height="50">
-                            <div class="ml-2 d-flex flex-column">
-                                <p class="mb-0">{{ $comment->user->name }}</p>
-                                <a href="{{ url('users/' .$comment->user->id) }}" class="text-secondary">{{ $comment->user->screen_name }}</a>
+                            <div class="com-username">
+                                <p class="user-name">{{ $comment->user->name }}</p>
+                                <a href="{{ url('users/' .$comment->user->id) }}" class="user-screenname">{{ $comment->user->screen_name }}</a>
                             </div>
-                            <div class="d-flex justify-content-end flex-grow-1">
-                                <p class="mb-0 text-secondary">{{ $comment->created_at->format('Y-m-d H:i') }}</p>
+                            <div class="timeline">
+                                <p class="text">{{ $comment->created_at->format('Y-m-d H:i') }}</p>
                             </div>
                         </div>
-                        <div class="py-3">
+                        <div class="comment-text">
                             {!! nl2br(e($comment->text)) !!}
                         </div>
                     </li>
                 @empty
                     <li class="list-group-item">
-                        <p class="mb-0 text-secondary">コメントはまだありません。</p>
+                        <p class="text">コメントはまだありません。</p>
                     </li>
                 @endforelse
                 <li class="list-group-item">
@@ -95,15 +90,15 @@
                         <form method="POST" action="{{ route('comments.store') }}">
                             @csrf
 
-                            <div class="form-group row mb-0">
-                                <div class="col-md-12 p-3 w-100 d-flex">
+                            <div class="commet-user-item">
+                                <div class="comment-user">
                                     <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="rounded-circle" width="50" height="50">
-                                    <div class="ml-2 d-flex flex-column">
-                                        <p class="mb-0">{{ $user->name }}</p>
-                                        <a href="{{ url('users/' .$user->id) }}" class="text-secondary">{{ $user->screen_name }}</a>
+                                    <div class="com-usernname">
+                                        <p class="user-name">{{ $user->name }}</p>
+                                        <a href="{{ url('users/' .$user->id) }}" class="user-screenname">{{ $user->screen_name }}</a>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="comment-texterea">
                                     <input type="hidden" name="tweet_id" value="{{ $tweet->id }}">
                                     <textarea class="form-control @error('text') is-invalid @enderror" name="text" required autocomplete="text" rows="4">{{ old('text') }}</textarea>
 
@@ -115,11 +110,11 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row mb-0">
-                                <div class="col-md-12 text-right">
-                                    <p class="mb-4 text-danger">140文字以内</p>
-                                    <button type="submit" class="btn btn-primary">
-                                        ツイートする
+                            <div class="post-item">
+                                <div class="">
+                                    <p class="text">140文字以内</p>
+                                    <button type="submit" class="button">
+                                        投稿する
                                     </button>
                                 </div>
                             </div>

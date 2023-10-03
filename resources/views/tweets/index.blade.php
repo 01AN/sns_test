@@ -63,6 +63,10 @@
                                 <p class="count">{{ count($timeline->favorites) }}</p>
                             </div>
 
+                            <div class=tags>
+                                
+                            </div>
+
                         </div>
                     </div>
                 </div>
