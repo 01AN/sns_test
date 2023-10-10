@@ -61,6 +61,7 @@ class Tweet extends Model
     {
         $this->user_id = $user_id;
         $this->text = $data['text'];
+        $this->text = $data['tag'];
         $this->save();
 
         return;
@@ -95,5 +96,11 @@ class Tweet extends Model
             array_push($result, $tweetTag->tweetTag());
         }
         return $result;
+    }
+
+    //投稿に属するタグを取得
+    public function ranks()
+    {
+        return $this->belongsToMany('App\tag');
     }
 }

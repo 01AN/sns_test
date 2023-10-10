@@ -20,7 +20,7 @@
                                 </div>
                             </div>
                             <div class="post-text">
-                                <textarea class="form-control @error('text') is-invalid @enderror" name="text" required autocomplete="text" rows="4">{{ old('text') }}</textarea>
+                                <textarea class="form-control" name="text" required rows="4">{{ old('text') }}</textarea>
 
                                 @error('text')
                                     <span class="error-message" role="alert">
@@ -29,7 +29,7 @@
                                 @enderror
                             </div>
                             <div class="post-tag">
-                                <textarea class="form-control @error('text') is-invalid @enderror" name="text" required autocomplete="text" rows="4">{{ old('text') }}</textarea>
+                                <textarea class="form-control" name="tag" required rows="1">{{ old('tag') }}</textarea>
 
                                 @error('text')
                                     <span class="error-message" role="alert">
@@ -37,6 +37,7 @@
                                     </span>
                                 @enderror
                             </div>
+                            
                         </div>
 
                         <div class="post-item">

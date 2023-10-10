@@ -81,7 +81,8 @@ class TweetsController extends Controller
         return view('tweets.show', [
             'user'     => $user,
             'tweet' => $tweet,
-            'comments' => $comments
+            'comments' => $comments,
+            'tag' => $tag,
         ]);
     }
 

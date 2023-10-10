@@ -12,7 +12,6 @@ class Tweet_Tag extends Model
     //
     public function tweetTag()
     {
-        return User::find($this->user);
+        return $this->belongsTo(Tag::class);
     }
-
 }
