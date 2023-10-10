@@ -13,7 +13,7 @@ class CreateIntermediateTable extends Migration
      */
     public function up()
     {
-        Schema::create('intermediate', function (Blueprint $table) {
+        Schema::create('tweet_tag', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('tweet_id');
             $table->integer('tag_id');

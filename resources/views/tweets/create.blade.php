@@ -28,6 +28,15 @@
                                     </span>
                                 @enderror
                             </div>
+                            <div class="post-tag">
+                                <textarea class="form-control @error('text') is-invalid @enderror" name="text" required autocomplete="text" rows="4">{{ old('text') }}</textarea>
+
+                                @error('text')
+                                    <span class="error-message" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
 
                         <div class="post-item">

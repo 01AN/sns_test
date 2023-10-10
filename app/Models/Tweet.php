@@ -85,4 +85,15 @@ class Tweet extends Model
         return $this->where('user_id', $user_id)->where('id', $tweet_id)->delete();
     }
 
+    //投稿に関連付いたタグのリストを取得する
+
+    public function tweetTags()
+    {
+        $tweetTags = Tweet_Tag::where('tag_id', $this->id)->get();
+        $result = [];
+        foreach ($tweetTags as $tweetTag) {
+            array_push($result, $tweetTag->tweetTag());
+        }
+        return $result;
+    }
 }
