@@ -39,6 +39,12 @@
                                 </div>
                             @endif
 
+                            @foreach ($timelines as $timeline)
+                                <span class="tag">
+                                    
+                                </span>
+                            @endforeach
+
                             <!-- コメント -->
                             <div class="comment-item">
                                 <a href="{{ url('tweets/' .$timeline->id) }}"><i class="far fa-comment fa-fw"></i></a>

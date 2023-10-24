@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Tweet;
 use App\Models\Comment;
 use App\Models\Follower;
+use App\Models\Tag;
 
 class TweetsController extends Controller
 {
@@ -44,7 +45,6 @@ class TweetsController extends Controller
         ]);
     }
 
-
     /**
      * Store a newly created resource in storage.
      *
@@ -58,6 +58,20 @@ class TweetsController extends Controller
         $validator = Validator::make($data, [
             'text' => ['required', 'string', 'max:140']
         ]);
+
+        preg_match_all('/#([a-zA-z0-9０-９ぁ-んァ-ヶ亜-熙]+)/u', $request->tags, $match);
+
+        $tags = [];
+        foreach ($match[1] as $tag) {
+            $record = Tag::firstOrCreate(['name' => $tag]);
+            array_push($tags, $record);
+        };
+
+        $tags_id = [];
+        foreach ($tags as $tag) {
+            array_push($tags_id, $tag['id']);
+        };
+        $tweet->tags()->attach($tags_id);
 
         $validator->validate();
         $tweet->tweetStore($user->id, $data);

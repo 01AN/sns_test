@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class tag extends Model
 {
     use HasFactory;
-
+    
+    public function tweets()
+    {
+        return $this->belongsToMany('App\Models\Tweet'); 
+    }
 
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateIntermediateTable extends Migration
+class CreateTweet_TagTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,9 +15,11 @@ class CreateIntermediateTable extends Migration
     {
         Schema::create('tweet_tag', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('tweet_id');
-            $table->integer('tag_id');
             $table->timestamps();
+            $table->unsignedInteger('tag_id');
+            $table->unsignedInteger('tweet_id');
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
+            $table->foreign('tweet_id')->references('id')->on('tweets')->onDelete('cascade');
         });
     }
 
@@ -28,6 +30,6 @@ class CreateIntermediateTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('intermediate');
+        Schema::dropIfExists('tweet_tag');
     }
 }

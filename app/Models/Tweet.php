@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\softDeletes;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Tweet extends Model
 {
@@ -61,7 +63,6 @@ class Tweet extends Model
     {
         $this->user_id = $user_id;
         $this->text = $data['text'];
-        $this->text = $data['tag'];
         $this->save();
 
         return;
@@ -86,21 +87,12 @@ class Tweet extends Model
         return $this->where('user_id', $user_id)->where('id', $tweet_id)->delete();
     }
 
-    //投稿に関連付いたタグのリストを取得する
+    
 
-    public function tweetTags()
+    //
+    public function tags()
     {
-        $tweetTags = Tweet_Tag::where('tag_id', $this->id)->get();
-        $result = [];
-        foreach ($tweetTags as $tweetTag) {
-            array_push($result, $tweetTag->tweetTag());
-        }
-        return $result;
+        return $this->belongsToMany('App\Models\Tag'); 
     }
 
-    //投稿に属するタグを取得
-    public function ranks()
-    {
-        return $this->belongsToMany('App\tag');
-    }
 }

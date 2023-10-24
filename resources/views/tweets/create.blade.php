@@ -28,15 +28,23 @@
                                     </span>
                                 @enderror
                             </div>
-                            <div class="post-tag">
-                                <textarea class="form-control" name="tag" required rows="1">{{ old('tag') }}</textarea>
-
-                                @error('text')
-                                    <span class="error-message" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                            <div class="form-group">
+                        <label for="tags">
+                            タグ
+                        </label>
+                        <input
+                            id="tags"
+                            name="tags"
+                            class="form-control {{ $errors->has('tags') ? 'is-invalid' : '' }}"
+                            value="{{ old('tags') }}"
+                            type="text"
+                        >
+                        @if ($errors->has('tags'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('tags') }}
                             </div>
+                        @endif
+                    </div>
                             
                         </div>
 
