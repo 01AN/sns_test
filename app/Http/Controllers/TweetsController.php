@@ -56,10 +56,26 @@ class TweetsController extends Controller
         $user = auth()->user();
         $data = $request->all();
         $validator = Validator::make($data, [
-            'text' => ['required', 'string', 'max:140']
+            'text' => ['required', 'string', 'max:140'],
+            'tag' => ['nullable','string'],
         ]);
 
-        preg_match_all('/#([a-zA-z0-9０-９ぁ-んァ-ヶ亜-熙]+)/u', $request->tags, $match);
+        $input_tag = $request->get('tag');
+        if (isset($input_tag)) {
+            $tag_ids = [];
+            $tags = explode(',', $input_tag);
+            foreach ($tags as $tag) {
+                $tag = Tag::updateOrCreate(
+                    [
+                        'name' => $tag,
+                    ]
+                );
+                $tag_ids[] = $tag->id;
+            }
+            $article->tags()->sync($tag_ids);
+        }
+
+        /* preg_match_all('/#([a-zA-z0-9０-９ぁ-んァ-ヶ亜-熙]+)/u', $request->tags, $match);
 
         $tags = [];
         foreach ($match[1] as $tag) {
@@ -71,7 +87,7 @@ class TweetsController extends Controller
         foreach ($tags as $tag) {
             array_push($tags_id, $tag['id']);
         };
-        $tweet->tags()->attach($tags_id);
+        $tweet->tags()->attach($tags_id); */
 
         $validator->validate();
         $tweet->tweetStore($user->id, $data);
@@ -96,7 +112,7 @@ class TweetsController extends Controller
             'user'     => $user,
             'tweet' => $tweet,
             'comments' => $comments,
-            'tag' => $tag,
+            //'tag' => $tag,
         ]);
     }
 

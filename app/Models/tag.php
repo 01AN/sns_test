@@ -11,7 +11,7 @@ class tag extends Model
     
     public function tweets()
     {
-        return $this->belongsToMany('App\Models\Tweet'); 
+        return $this->belongsToMany('App\Models\Tweet')->withTimestamps(); 
     }
 
 }

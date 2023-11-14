@@ -24,6 +24,11 @@
                         <div class="content">
                             {!! nl2br(e($timeline->text)) !!}
                         </div>
+
+                        @foreach($timeline->user->id === Auth::user()->id)
+                                <span class="tag">{{$tweet_tag->name}}</span>
+                        @endforeach
+
                         <div class="card-footer">
                             @if ($timeline->user->id === Auth::user()->id)
                                 <div class="post-login-user">
@@ -39,11 +44,7 @@
                                 </div>
                             @endif
 
-                            @foreach ($timelines as $timeline)
-                                <span class="tag">
-                                    
-                                </span>
-                            @endforeach
+                            
 
                             <!-- コメント -->
                             <div class="comment-item">

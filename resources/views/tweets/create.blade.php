@@ -29,13 +29,16 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                        <label for="tags">
+
+                            <input type="text" name="tag" value="{{old('tag')}}">
+
+                        <!-- <label for="tags">
                             タグ
                         </label>
                         <input
                             id="tags"
                             name="tags"
-                            class="form-control {{ $errors->has('tags') ? 'is-invalid' : '' }}"
+                            
                             value="{{ old('tags') }}"
                             type="text"
                         >
@@ -43,8 +46,8 @@
                             <div class="invalid-feedback">
                                 {{ $errors->first('tags') }}
                             </div>
-                        @endif
-                    </div>
+                        @endif -->
+                        </div>
                             
                         </div>
 
