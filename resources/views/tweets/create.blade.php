@@ -30,23 +30,9 @@
                             </div>
                             <div class="form-group">
 
-                            <input type="text" name="tag" value="{{old('tag')}}">
-
-                        <!-- <label for="tags">
-                            タグ
-                        </label>
-                        <input
-                            id="tags"
-                            name="tags"
-                            
-                            value="{{ old('tags') }}"
-                            type="text"
-                        >
-                        @if ($errors->has('tags'))
-                            <div class="invalid-feedback">
-                                {{ $errors->first('tags') }}
+                            <div class="post-tag">
+                                <textarea class="form-control" name="tag">{{ old('tag') }}</textarea>
                             </div>
-                        @endif -->
                         </div>
                             
                         </div>

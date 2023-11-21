@@ -7,6 +7,7 @@
         <div class="tittle">
             <a href="{{ url('users') }}">ユーザ一覧 <i class="user-list"></i> </a>
         </div>
+
         @if (isset($timelines))
             @foreach ($timelines as $timeline)
                 <div class="post">
@@ -25,9 +26,7 @@
                             {!! nl2br(e($timeline->text)) !!}
                         </div>
 
-                        @foreach($timeline->user->id === Auth::user()->id)
-                                <span class="tag">{{$tweet_tag->name}}</span>
-                        @endforeach
+                        
 
                         <div class="card-footer">
                             @if ($timeline->user->id === Auth::user()->id)
@@ -45,8 +44,6 @@
                             @endif
 
                             
-
-                            <!-- コメント -->
                             <div class="comment-item">
                                 <a href="{{ url('tweets/' .$timeline->id) }}"><i class="far fa-comment fa-fw"></i></a>
                                 <p class="count">{{ count($timeline->comments) }}</p>

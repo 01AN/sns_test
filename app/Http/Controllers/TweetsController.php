@@ -20,11 +20,13 @@ class TweetsController extends Controller
     {
         $user = auth()->user();
         $follow_ids = $follower->followingIds($user->id);
+
+  
         // followed_idだけ抜き出す
         $following_ids = $follow_ids->pluck('followed_id')->toArray();
 
-        $timelines = $tweet->getTimelines($user->id, $following_ids);
 
+        $timelines = $tweet->getTimelines($user->id, $following_ids);
         return view('tweets.index', [
             'user'      => $user,
             'timelines' => $timelines
@@ -67,27 +69,13 @@ class TweetsController extends Controller
             foreach ($tags as $tag) {
                 $tag = Tag::updateOrCreate(
                     [
-                        'name' => $tag,
+                        'tagname' => $tag,
                     ]
                 );
                 $tag_ids[] = $tag->id;
             }
             $article->tags()->sync($tag_ids);
         }
-
-        /* preg_match_all('/#([a-zA-z0-9０-９ぁ-んァ-ヶ亜-熙]+)/u', $request->tags, $match);
-
-        $tags = [];
-        foreach ($match[1] as $tag) {
-            $record = Tag::firstOrCreate(['name' => $tag]);
-            array_push($tags, $record);
-        };
-
-        $tags_id = [];
-        foreach ($tags as $tag) {
-            array_push($tags_id, $tag['id']);
-        };
-        $tweet->tags()->attach($tags_id); */
 
         $validator->validate();
         $tweet->tweetStore($user->id, $data);
@@ -107,12 +95,13 @@ class TweetsController extends Controller
         $user = auth()->user();
         $tweet = $tweet->getTweet($tweet->id);
         $comments = $comment->getComments($tweet->id);
+        $tags = $tag->getTags($article->id);
 
         return view('tweets.show', [
             'user'     => $user,
             'tweet' => $tweet,
             'comments' => $comments,
-            //'tag' => $tag,
+            'tag' => $tag,
         ]);
     }
 
