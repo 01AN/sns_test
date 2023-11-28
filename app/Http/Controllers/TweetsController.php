@@ -62,7 +62,7 @@ class TweetsController extends Controller
             'tag' => ['nullable','string'],
         ]);
 
-        $input_tag = $request->get('tag');
+        $input_tag = $request->get('tagname');
         if (isset($input_tag)) {
             $tag_ids = [];
             $tags = explode(',', $input_tag);

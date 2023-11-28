@@ -33,6 +33,9 @@
                             <div class="post-tag">
                                 <textarea class="form-control" name="tag">{{ old('tag') }}</textarea>
                             </div>
+                        
+
+
                         </div>
                             
                         </div>

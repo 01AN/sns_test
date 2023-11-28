@@ -28,6 +28,8 @@
 
                         
 
+                        
+
                         <div class="card-footer">
                             @if ($timeline->user->id === Auth::user()->id)
                                 <div class="post-login-user">
