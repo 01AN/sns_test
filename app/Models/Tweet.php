@@ -92,7 +92,7 @@ class Tweet extends Model
 
     public function tags()
     {
-        return $this->belongsToMany('App\Models\Tag')->withTimestamps(); 
+        return $this->belongsToMany('App\Models\Tag')->withTimestamps();
     }
 
 }

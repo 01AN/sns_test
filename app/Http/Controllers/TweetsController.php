@@ -62,19 +62,19 @@ class TweetsController extends Controller
             'tag' => ['nullable','string'],
         ]);
 
-        $input_tag = $request->get('tagname');
+        $input_tag = $request->get('tag');
         if (isset($input_tag)) {
-            $tag_ids = [];
+            $tag_id = [];
             $tags = explode(',', $input_tag);
             foreach ($tags as $tag) {
                 $tag = Tag::updateOrCreate(
                     [
-                        'tagname' => $tag,
+                        'tag' => $tag,
                     ]
                 );
-                $tag_ids[] = $tag->id;
+                $tag_id[] = $tag->id;
             }
-            $article->tags()->sync($tag_ids);
+            $tag->tags()->sync($tag_id);
         }
 
         $validator->validate();
@@ -95,7 +95,7 @@ class TweetsController extends Controller
         $user = auth()->user();
         $tweet = $tweet->getTweet($tweet->id);
         $comments = $comment->getComments($tweet->id);
-        $tags = $tag->getTags($article->id);
+        $tags = $tweet->getTags($tag->id);
 
         return view('tweets.show', [
             'user'     => $user,
