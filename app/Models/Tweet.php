@@ -17,7 +17,7 @@ class Tweet extends Model
      * @var array
      */
     protected $fillable = [
-        'text'
+        'text','tag'
     ];
 
     public function user()
@@ -86,9 +86,6 @@ class Tweet extends Model
     {
         return $this->where('user_id', $user_id)->where('id', $tweet_id)->delete();
     }
-
-    
-
 
     public function tags()
     {

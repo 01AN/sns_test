@@ -31,7 +31,7 @@
                             <div class="form-group">
 
                             <div class="post-tag">
-                                <textarea class="form-control" name="tag">{{ old('tag') }}</textarea>
+                                <input type="text" name="tag" value="{{old('tag')}}">
                             </div>
                         
 

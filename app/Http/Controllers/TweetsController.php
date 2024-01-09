@@ -74,7 +74,7 @@ class TweetsController extends Controller
                 );
                 $tag_id[] = $tag->id;
             }
-            $tag->tags()->sync($tag_id);
+            $tweet->tags()->sync($tag_id);
         }
 
         $validator->validate();
