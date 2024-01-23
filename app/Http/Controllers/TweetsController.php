@@ -62,7 +62,7 @@ class TweetsController extends Controller
             'tag' => ['nullable','string'],
         ]);
 
-        $input_tag = $request->get('tag');
+        /* $input_tag = $request->get('tag');
         if (isset($input_tag)) {
             $tag_id = [];
             $tags = explode(',', $input_tag);
@@ -75,7 +75,7 @@ class TweetsController extends Controller
                 $tag_id[] = $tag->id;
             }
             $tweet->tags()->sync($tag_id);
-        }
+        } */
 
         $validator->validate();
         $tweet->tweetStore($user->id, $data);
