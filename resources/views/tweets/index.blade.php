@@ -16,7 +16,7 @@
                             <img src="{{ asset('storage/profile_image/' .$timeline->user->profile_image) }}" class="post-usericon">
                             <div class="post-username">
                                 <p class="text">{{ $timeline->user->name }}</p>
-                                <a href="{{ url('users/' .$timeline->user->id) }}" class="text">{{ $timeline->user->screen_name }}</a>S
+                                <a href="{{ url('users/' .$timeline->user->id) }}" class="text">{{ $timeline->user->screen_name }}</a>
                             </div>
                             <div class="timeline">
                                 <p class="text">{{ $timeline->created_at->format('Y-m-d H:i') }}</p>

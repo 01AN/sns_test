@@ -16,7 +16,7 @@ class Tweet extends Model
      *
      * @var array
      */
-    protected $fillable = ['text','tag'];
+    protected $fillable = ['text'];
 
     public function user()
     {

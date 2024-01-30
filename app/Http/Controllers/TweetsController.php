@@ -59,10 +59,10 @@ class TweetsController extends Controller
         $data = $request->all();
         $validator = Validator::make($data, [
             'text' => ['required', 'string', 'max:140'],
-            'tag' => ['nullable','string'],
+            'tag' => ['required', 'string'],
         ]);
 
-        /* $input_tag = $request->get('tag');
+        $input_tag = $request->get('tag');
         if (isset($input_tag)) {
             $tag_id = [];
             $tags = explode(',', $input_tag);
@@ -75,7 +75,7 @@ class TweetsController extends Controller
                 $tag_id[] = $tag->id;
             }
             $tweet->tags()->sync($tag_id);
-        } */
+        }
 
         $validator->validate();
         $tweet->tweetStore($user->id, $data);
@@ -95,13 +95,13 @@ class TweetsController extends Controller
         $user = auth()->user();
         $tweet = $tweet->getTweet($tweet->id);
         $comments = $comment->getComments($tweet->id);
-        $tags = $tweet->getTags($tag->id);
+        /* $tags = $tweet->getTags($tag->id); */
 
         return view('tweets.show', [
             'user'     => $user,
             'tweet' => $tweet,
             'comments' => $comments,
-            'tag' => $tag,
+            /* 'tag' => $tag, */
         ]);
     }
 
